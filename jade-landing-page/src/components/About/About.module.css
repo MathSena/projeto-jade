@@ -1,0 +1,54 @@
+.about {
+  background-color: var(--surface-light);
+  padding: 4rem 0;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+  align-items: center;
+}
+
+.aboutImage {
+  width: 100%;
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.title {
+  font-size: 2.25rem; /* 36px */
+}
+
+.features {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.featureItem {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 500;
+}
+
+.featureItem span:first-child { /* O ícone */
+  color: var(--color-primary);
+}
+
+/* Media Query (md:) */
+@media (min-width: 768px) {
+  .about {
+    padding: 6rem 0;
+  }
+  .grid {
+    /* 2 colunas para imagem, 3 para texto */
+    grid-template-columns: 2fr 3fr; 
+  }
+  .features {
+    flex-direction: row;
+    gap: 2rem;
+  }
+}
