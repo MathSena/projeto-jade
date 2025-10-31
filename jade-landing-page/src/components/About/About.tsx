@@ -1,17 +1,51 @@
+import { motion } from 'framer-motion'
 import styles from './About.module.css'
+import aboutImage from '../../assets/about-jade.jpg'
+
+const imageVariants = {
+  hidden: { opacity: 0, y: 50 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.6,
+      ease: 'easeOut' as const
+    }
+  }
+}
+
+const contentVariants = {
+  hidden: { opacity: 0, y: 50 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.6,
+      ease: 'easeOut' as const,
+      delay: 0.2
+    }
+  }
+}
 
 export function About() {
   return (
-    <section className={styles.about} id="about">
+    <motion.section
+      className={styles.about}
+      id="about"
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.3 }}
+    >
       <div className={`${styles.grid} container`}>
-        <div className={styles.imageWrapper}>
+        <motion.div className={styles.imageWrapper} variants={imageVariants}>
           <img
             alt="Professora Jade dando aula"
             className={styles.aboutImage}
-            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDn_d69noFymn57sxuZQZru8AB6IeZFt87vNxWCts5allojQwYz_gHm5r8Axn_eK66HBx_HiJlslP0P9NBkgQ0i9UnNtEmeylb-wdFn0rGV_6LswFam32A2kWXUIVxWcirNR5s1hHICYffGgMbUqxKFrbvG4B5Ks5NOs4zCp8w4kUx1Y6eEwhXXNXSSHYUeRW6cEReqGSQ7E093m6Of6U2KckdVcIzlgdM7rC9HGXzCPV0fbDrzBuRTjjtAgOBdDUwbzbPhAsXfC5NR"
+            src={aboutImage}
           />
-        </div>
-        <div className={styles.content}>
+        </motion.div>
+
+        <motion.div className={styles.content} variants={contentVariants}>
           <h2 className={styles.title}>Sobre a Teacher Jade</h2>
           <p>
             Olá! Sou a Jade, apaixonada por idiomas e por conectar pessoas
@@ -25,16 +59,20 @@ export function About() {
           </p>
           <div className={styles.features}>
             <div className={styles.featureItem}>
-              <span className="material-symbols-outlined">school</span>
+              <span className={styles.iconWrapper}>
+                <span className="material-symbols-outlined">school</span>
+              </span>
               <span>+5 anos de experiência</span>
             </div>
             <div className={styles.featureItem}>
-              <span className="material-symbols-outlined">verified</span>
+              <span className={styles.iconWrapper}>
+                <span className="material-symbols-outlined">verified</span>
+              </span>
               <span>Certificação Internacional</span>
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
-    </section>
+    </motion.section>
   )
 }

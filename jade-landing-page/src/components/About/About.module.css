@@ -10,10 +10,19 @@
   align-items: center;
 }
 
+.imageWrapper {
+  /* Adicionado para o Framer Motion não bagunçar o layout */
+  width: 100%;
+}
+
+/* ================================== */
+/* MELHORIA 1: Polimento da Imagem */
+/* ================================== */
 .aboutImage {
   width: 100%;
   border-radius: 0.75rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  /* Usando sua variável de sombra global para consistência */
+  box-shadow: var(--shadow-light);
 }
 
 .title {
@@ -30,12 +39,25 @@
 .featureItem {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 1rem; /* Aumentei o gap para o ícone respirar */
   font-weight: 500;
 }
 
-.featureItem span:first-child { /* O ícone */
-  color: var(--color-primary);
+/* ================================== */
+/* MELHORIA 2: Polimento dos Ícones */
+/* ================================== */
+.iconWrapper {
+  /* A "caixinha" do ícone */
+  flex-shrink: 0; /* Impede que o ícone encolha */
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background-color: var(--color-primary-light); /* Amarelo claro */
+  color: var(--color-primary-dark); /* Amarelo escuro */
+
+  /* Centraliza o ícone perfeitamente */
+  display: grid;
+  place-items: center;
 }
 
 /* Media Query (md:) */
@@ -45,7 +67,8 @@
   }
   .grid {
     /* 2 colunas para imagem, 3 para texto */
-    grid-template-columns: 2fr 3fr; 
+    grid-template-columns: 2fr 3fr;
+    gap: 4rem; /* Aumentei o gap geral no desktop */
   }
   .features {
     flex-direction: row;
