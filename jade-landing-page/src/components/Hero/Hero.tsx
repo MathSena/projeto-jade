@@ -1,10 +1,45 @@
+import { motion } from 'framer-motion'
 import styles from './Hero.module.css'
+import heroImage from '../../assets/about-jade.jpg'
+
+// 2. Definimos nossas "receitas" de animação
+const contentVariants = {
+  hidden: { opacity: 0, x: -50 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: {
+      duration: 0.6,
+      ease: 'easeOut' as const
+    }
+  }
+}
+
+const imageVariants = {
+  hidden: { opacity: 0, x: 50 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: {
+      duration: 0.6,
+      ease: 'easeOut' as const,
+      delay: 0.2
+    }
+  }
+}
 
 export function Hero() {
   return (
-    <section className={`${styles.hero} container`}>
+    // 3. Usamos motion.section para controlar o "quando" animar
+    <motion.section
+      className={`${styles.hero} container`}
+      initial="hidden" // Começa como "hidden"
+      whileInView="visible" // Anima para "visible" quando entra na tela
+      viewport={{ once: true, amount: 0.3 }} // Ativa 1x com 30% de visibilidade
+    >
       <div className={styles.grid}>
-        <div className={styles.content}>
+        {/* 4. Aplicamos a animação de CONTEÚDO */}
+        <motion.div className={styles.content} variants={contentVariants}>
           <span className={styles.subtitle}>Aulas de Inglês Online</span>
           <h1 className={styles.headline}>
             Fale inglês com{' '}
@@ -23,16 +58,16 @@ export function Hero() {
               Ver Cursos
             </a>
           </div>
-        </div>
-        <div className={styles.imageWrapper}>
-          {/* Imagem da Professora */}
+        </motion.div>
+
+        <motion.div className={styles.imageWrapper} variants={imageVariants}>
           <img
             alt="Foto da professora Jade sorrindo"
             className={styles.heroImage}
-            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDn_d69noFymn57sxuZQZru8AB6IeZFt87vNxWCts5allojQwYz_gHm5r8Axn_eK66HBx_HiJlslP0P9NBkgQ0i9UnNtEmeylb-wdFn0rGV_6LswFam32A2kWXUIVxWcirNR5s1hHICYffGgMbUqxKFrbvG4B5Ks5NOs4zCp8w4kUx1Y6eEwhXXNXSSHYUeRW6cEReqGSQ7E093m6Of6U2KckdVcIzlgdM7rC9HGXzCPV0fbDrzBuRTjjtAgOBdDUwbzbPhAsXfC5NR" // Mude para uma imagem local
+            src={heroImage}
           />
-        </div>
+        </motion.div>
       </div>
-    </section>
+    </motion.section>
   )
 }

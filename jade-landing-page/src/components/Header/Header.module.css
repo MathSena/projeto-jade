@@ -1,11 +1,22 @@
 .header {
-  background-color: rgba(255, 255, 255, 0.8);
-  backdrop-filter: blur(10px);
+  /* Estilo inicial (transparente) */
+  background-color: transparent;
   position: sticky;
   top: 0;
   z-index: 50;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
   width: 100%;
+
+ 
+  transition: background-color 0.3s ease, backdrop-filter 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+
+.header.scrolled {
+  background-color: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px); /* Suporte para Safari */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
 .nav {
@@ -86,7 +97,7 @@
   color: var(--color-primary-dark);
 }
 
-/* Media Query (o "pulo do gato" do 'md:') */
+/* Media Query */
 @media (min-width: 768px) {
   .desktopMenu {
     display: flex; /* Aparece em telas médias */

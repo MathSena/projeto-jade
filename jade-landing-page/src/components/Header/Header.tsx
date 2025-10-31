@@ -1,11 +1,34 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import styles from './Header.module.css' // Importa o CSS Module
 
 export function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [isScrolled, setIsScrolled] = useState(false) // Estado para o scroll
+
+  // Efeito para "ouvir" o scroll da página
+  useEffect(() => {
+    // A função que vai checar o scroll
+    const handleScroll = () => {
+      // Se o usuário rolou mais que 10 pixels, ativamos o estado
+      if (window.scrollY > 10) {
+        setIsScrolled(true)
+      } else {
+        setIsScrolled(false)
+      }
+    }
+
+    // Adiciona o "ouvinte" (event listener)
+    window.addEventListener('scroll', handleScroll)
+
+    // "Limpa" o ouvinte quando o componente "morrer" (boa prática)
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+    }
+  }, []) // O [] vazio garante que isso rode só uma vez
 
   return (
-    <header className={styles.header}>
+    // Adiciona a classe .scrolled dinamicamente
+    <header className={`${styles.header} ${isScrolled ? styles.scrolled : ''}`}>
       <nav className={`${styles.nav} container`}>
         <a className={styles.logo} href="#">
           Jade English
@@ -22,10 +45,12 @@ export function Header() {
           </a>
         </div>
 
-        {/* Botão Mobile */}
+        {/* Botão Mobile com BÔNUS DE ACESSIBILIDADE */}
         <button
           className={styles.mobileButton}
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          aria-label={isMobileMenuOpen ? 'Fechar menu' : 'Abrir menu'}
+          aria-expanded={isMobileMenuOpen}
         >
           {/* Material Icon (precisa do link no index.html) */}
           <span className="material-symbols-outlined">

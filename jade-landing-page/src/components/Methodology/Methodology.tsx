@@ -1,8 +1,9 @@
 import styles from './Methodology.module.css'
+import { motion } from 'framer-motion'
 
 export function Methodology() {
   return (
-    <section className={styles.methodology} id="methodology">
+    <motion.section className={styles.methodology} id="methodology">
       <div className="container">
         <div className={styles.header}>
           <h2>Minha Metodologia</h2>
@@ -42,6 +43,6 @@ export function Methodology() {
           </div>
         </div>
       </div>
-    </section>
+    </motion.section>
   )
 }
