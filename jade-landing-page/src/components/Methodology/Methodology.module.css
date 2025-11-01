@@ -1,5 +1,6 @@
 .methodology {
   padding: 4rem 0;
+  overflow-x: hidden; 
 }
 
 .header {
@@ -18,31 +19,47 @@
   background-color: var(--surface-light);
   padding: 2rem;
   border-radius: 0.75rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  box-shadow: var(--shadow-light);
   text-align: center;
   transition: all 0.3s ease;
 }
 
 .card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  transform: translateY(-8px); 
+ 
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
 }
 
-.card span { /* Ícone */
-  font-size: 2.5rem;
-  color: var(--color-primary);
-  margin-bottom: 1rem;
+
+.iconWrapper {
+  
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  margin: 0 auto 1.5rem auto; 
+  background-color: var(--color-primary-light); 
+  color: var(--color-primary-dark); 
+
+  display: grid;
+  place-items: center;
 }
+
+.iconWrapper span {
+
+  font-size: 2.5rem;
+}
+
 .card h3 {
   font-size: 1.25rem;
 }
 
-/* Media Query (md:) */
+
 @media (min-width: 768px) {
   .methodology {
     padding: 6rem 0;
   }
   .grid {
-    grid-template-columns: repeat(3, 1fr); /* 3 colunas */
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 2rem; 
   }
 }
