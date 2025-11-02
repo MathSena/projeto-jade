@@ -1,6 +1,7 @@
 .courses {
   background-color: var(--surface-light);
   padding: 4rem 0;
+  overflow-x: hidden; 
 }
 
 .title {
@@ -14,23 +15,30 @@
   gap: 1.5rem;
 }
 
+
 .card {
-  border: 1px solid #eee;
+
+  background-color: var(--surface-light); 
   border-radius: 0.75rem;
   padding: 1.5rem;
   text-align: center;
-  transition: border-color 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); 
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+ 
   display: flex;
   flex-direction: column;
+  height: 100%; 
 }
 
+
 .card:hover {
-  border-color: var(--color-primary);
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-light); 
 }
 
 .card p {
-  flex-grow: 1; /* Faz o <p> ocupar o espaço, alinhando o <span> */
-  min-height: 80px;
+  flex-grow: 1; 
 }
 
 .cardTitlePrimary {
@@ -50,7 +58,9 @@
   background-color: rgba(32, 178, 170, 0.05); /* Fundo 'secondary' light */
 }
 .cardFeatured:hover {
-  border-color: var(--color-secondary);
+  /* Sombra customizada com a cor "secondary" */
+  box-shadow: 0 10px 15px -3px rgba(32, 178, 170, 0.1),
+    0 4px 6px -2px rgba(32, 178, 170, 0.05);
 }
 
 /* Media Query (lg:) */
@@ -60,6 +70,7 @@
   }
   .grid {
     grid-template-columns: repeat(4, 1fr); /* 4 colunas */
+    gap: 2rem;
   }
 }
 /* Media Query (md:) */

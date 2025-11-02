@@ -1,47 +1,104 @@
 import styles from './Courses.module.css'
+import { motion } from 'framer-motion'
+
+const coursesData = [
+  {
+    title: 'Básico',
+    description:
+      'Para quem está começando do zero e quer construir uma base sólida.',
+    levels: 'Níveis A1-A2',
+    isFeatured: false
+  },
+  {
+    title: 'Intermediário',
+    description:
+      'Para quem já entende o idioma e busca mais fluidez e confiança.',
+    levels: 'Níveis B1-B2',
+    isFeatured: false
+  },
+  {
+    title: 'Avançado',
+    description:
+      'Para quem quer refinar o idioma, discutir temas complexos e soar natural.',
+    levels: 'Níveis C1-C2',
+    isFeatured: false
+  },
+  {
+    title: 'Específico',
+    description:
+      'Aulas focadas em objetivos como entrevistas de emprego, viagens ou negócios.',
+    levels: 'Personalizado',
+    isFeatured: true
+  }
+]
+
+const headerVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: 'easeOut' as const }
+  }
+}
+
+const gridVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.2,
+      delayChildren: 0.2
+    }
+  }
+}
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 50 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, ease: 'easeOut' as const }
+  }
+}
 
 export function Courses() {
   return (
-    <section className={styles.courses} id="courses">
+    <motion.section
+      className={styles.courses}
+      id="courses"
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.2 }}
+    >
       <div className="container">
-        <h2 className={styles.title}>Nossos Cursos</h2>
-        <div className={styles.grid}>
-          {/* Card 1 */}
-          <div className={styles.card}>
-            <h3 className={styles.cardTitlePrimary}>Básico</h3>
-            <p>
-              Para quem está começando do zero e quer construir uma base sólida.
-            </p>
-            <span className={styles.levels}>Níveis A1-A2</span>
-          </div>
-          {/* Card 2 */}
-          <div className={styles.card}>
-            <h3 className={styles.cardTitlePrimary}>Intermediário</h3>
-            <p>
-              Para quem já entende o idioma e busca mais fluidez e confiança.
-            </p>
-            <span className={styles.levels}>Níveis B1-B2</span>
-          </div>
-          {/* Card 3 */}
-          <div className={styles.card}>
-            <h3 className={styles.cardTitlePrimary}>Avançado</h3>
-            <p>
-              Para quem quer refinar o idioma, discutir temas complexos e soar
-              natural.
-            </p>
-            <span className={styles.levels}>Níveis C1-C2</span>
-          </div>
-          {/* Card 4 (Específico) */}
-          <div className={`${styles.card} ${styles.cardFeatured}`}>
-            <h3 className={styles.cardTitleSecondary}>Específico</h3>
-            <p>
-              Aulas focadas em objetivos como entrevistas de emprego, viagens ou
-              negócios.
-            </p>
-            <span className={styles.levels}>Personalizado</span>
-          </div>
-        </div>
+        <motion.h2 className={styles.title} variants={headerVariants}>
+          Nossos Cursos
+        </motion.h2>
+
+        <motion.div className={styles.grid} variants={gridVariants}>
+          {coursesData.map(item => (
+            <motion.div
+              key={item.title}
+              className={`${styles.card} ${
+                item.isFeatured ? styles.cardFeatured : ''
+              }`}
+              variants={cardVariants}
+            >
+              <h3
+                className={
+                  item.isFeatured
+                    ? styles.cardTitleSecondary
+                    : styles.cardTitlePrimary
+                }
+              >
+                {item.title}
+              </h3>
+              <p>{item.description}</p>
+              <span className={styles.levels}>{item.levels}</span>
+            </motion.div>
+          ))}
+        </motion.div>
       </div>
-    </section>
+    </motion.section>
   )
 }
